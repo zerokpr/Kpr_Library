@@ -4,7 +4,7 @@
 template<class T>
 T gcd(T a, T b){
     if(b == 0) return a;
-    return gcd(a, a%b);
+    return gcd(b, a%b);
 }
 
 //素数判定

@@ -35,6 +35,7 @@ T pow(T a, int b){
         return ret*ret;
     }
 }
+
 template<class T>
 T pow(long long a, long long b, T mod){
     if(b == 0) return 1;
@@ -70,5 +71,3 @@ T comb(long long n,long long r,T mod){
     for(long long i = r; i >= 1; --i) fact2 = fact2*i%mod;
     return fact1*pow(fact2,mod-2,mod)%mod;
 }
-
-

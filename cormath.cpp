@@ -1,6 +1,4 @@
 
-
-
 // 最大公約数を求める
 // 計算量O(logn)
 template<class T>
@@ -31,20 +29,20 @@ bool isPrime(T n){
 template<class T>
 vector<T> prime_list(T n){
     vector<T> ret;
-    vector<bool> notPrime(n+1,false);
-    notPrime[0] = notPrime[1] = true;
-    for(T i = 2; i <= n; ++i){
-        if(notPrime[i]) continue;
+    vector<T> isPrime(n+1,1);
+    isPrime[0] = isPrime[1] = 0;
+    for(long long i = 2; i <= n; ++i){
+        if(isPrime[i] == 0) continue;
         ret.push_back(i);
-        for(T j = i*2; j <= n; j += i) notPrime[j] = true;
+        for(long long j = i*i; j <= n; j += i) isPrime[j] = 0;
     }
     return ret;
+    // return isPrime;  // 状況によってはこっちを返す
 }
-
 
 // 素因数分解
 // nを素因数分解してmapに記録
-// 計算量O(√n)
+// 計算量O(√nlogn),必要ならmapではなくvectorにすると計算量を落とせる
 template<class T>
 map<T,int> prime_factor(T n){
     map<T,int> ret;
@@ -52,8 +50,7 @@ map<T,int> prime_factor(T n){
         cout << "Prime_factor Error" << "\n";
         return ret;
     }
-    T i = 2;
-    for(T i = 2; i*i <= n; ++i){
+    for(long long i = 2; i*i <= n; ++i){
         while(n%i== 0){
             ++ret[i];
             n /= i;

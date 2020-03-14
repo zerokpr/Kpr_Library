@@ -73,10 +73,13 @@ private:
     //根にはグループの要素数に-1をかけたもの、それ以外には根の値
     //初期値は-1
     vector<int> uni;
+    int _group_num;
 public:
     //Constructer
     //uniを必要なサイズで初期化する、初期値は―1
-    union_find(int unisize) : uni(unisize,-1){}
+    union_find(int unisize) : uni(unisize,-1){
+        _group_num = unisize;
+    }
 
     //引数aの根を求める、なければaを根として返す
     int root(int a){
@@ -93,10 +96,11 @@ public:
         //uni[a], uni[b]がa, bがそれぞれが属するグループのサイズになる
         a = root(a);
         b = root(b);
-        if(a == b) return false;
+        if(a == b) return false; // 同じグループの場合
         if(uni[a] > uni[b]) swap(a,b); //bの方を大きいものにする
         uni[a] += uni[b];
         uni[b] = a; //大きい方のグループに属するものの親を小さいものの根にする(rootが高速で動くようになる)
+        _group_num--;
         return true;
     }
     //頂点aとbが同じグループかを調べる
@@ -109,9 +113,6 @@ public:
     }
     //グループ数を調べる
     int group_num(void){
-        int num = 0;
-        int s = uni.size();
-        for(int i = 0; i < s; i++) if(uni[i] < 0) num++;
-        return num;
+        return _group_num;
     }
 };

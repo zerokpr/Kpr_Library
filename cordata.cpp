@@ -35,9 +35,9 @@ public:
         leafnum = bilower(nodenum);
         seg = vector<T> (2*leafnum, m);
 
-        // fの実装
+        // 二項演算の実装
         f = [](T a, T b){
-            return a+b;
+            return ;
         };
     }
 
@@ -51,8 +51,7 @@ public:
         }
     }
 
-    //指定した区間の最小値を求める
-    //引数a,bで指定した半開区間[a,b)の中の最小値を求める
+    //引数a,bで指定した半開区間[a,b)の要素について計算する
     //_query(a,b,0,0,leafnum)として呼び出す、最期の引数に注意（leafnumはメンバ変数になっているのでそれを呼び出せばよい）
     T query(int a, int b){
         return _query(a, b, 0, 0, leafnum);

@@ -1,0 +1,29 @@
+
+class CumulativeSum2D{
+private:
+    vector<vector<ll>> CumSum;
+public:
+    // コンストラクタ
+    CumulativeSum2D(int H, int W): CumSum(H+1, vector<ll>(W+1, 0)){}
+    // 配列に値を加える
+    // 引数y, x：加えたい座標. CumSum[y][x]なので注意
+    void add(int y, int x, ll value){
+        ++x; ++y;
+        if(y >= CumSum.size() || x >= CumSum[0].size()) return;
+        CumSum[y][x] += value;
+    }
+    // 二次元累積和を構築する
+    // 引数、戻り値なし
+    void build(){
+        int h = CumSum.size()-1, w = CumSum[0].size()-1;
+        for(int i = 0; i < h; ++i){
+            for(int j = 0; j < w; ++j){
+                CumSum[i+1][j+1] += CumSum[i][j+1]+CumSum[i+1][j]-CumSum[i][j];
+            }
+        }
+    }
+    // (sx,sy)から(gx,gy)までの長方形の区間にある数の総和を求める（半開区間）
+    ll query(int sy, int sx, int gy, int gx){
+        return CumSum[gy][gx]-CumSum[sy][gx]-CumSum[gy][sx]+CumSum[sy][sx];
+    }
+};

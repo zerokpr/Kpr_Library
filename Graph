@@ -1,6 +1,7 @@
 
 /*
 * グラフ構造体
+* グラフ構築とBFS、DFS、ダイクストラ法、ワーシャルフロイド法をカバー
 */
 template<typename U>
 struct edge{

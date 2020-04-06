@@ -1,13 +1,14 @@
 
+template<typename T>
 class CumulativeSum2D{
 private:
-    vector<vector<ll>> CumSum;
+    vector<vector<T>> CumSum;
 public:
     // コンストラクタ
-    CumulativeSum2D(int H, int W): CumSum(H+1, vector<ll>(W+1, 0)){}
+    CumulativeSum2D(int H, int W): CumSum(H+1, vector<T>(W+1, 0)){}
     // 配列に値を加える
     // 引数y, x：加えたい座標. CumSum[y][x]なので注意
-    void add(int y, int x, ll value){
+    void add(int y, int x, T value){
         ++x; ++y;
         if(y >= CumSum.size() || x >= CumSum[0].size()) return;
         CumSum[y][x] += value;
@@ -23,7 +24,7 @@ public:
         }
     }
     // (sx,sy)から(gx,gy)までの長方形の区間にある数の総和を求める（半開区間）
-    ll query(int sy, int sx, int gy, int gx){
+    T query(int sy, int sx, int gy, int gx){
         return CumSum[gy][gx]-CumSum[sy][gx]-CumSum[gy][sx]+CumSum[sy][sx];
     }
 };

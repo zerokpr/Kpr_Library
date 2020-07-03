@@ -21,5 +21,5 @@
 - 繰り返し二乗法によるべき乗計算
 - べき乗計算のmod
 - mod上の二項係数
-#### 2Dcumlative_sum.cpp
+#### 2DCumlativeSum.cpp
 - 2次元累積和

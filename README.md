@@ -9,7 +9,6 @@
 
 ### 現在用意してあるもの
 #### cordata.cpp
-- 2次元累積和
 - セグメント木
 - union-find
 #### cormath.cpp
@@ -22,3 +21,5 @@
 - 繰り返し二乗法によるべき乗計算
 - べき乗計算のmod
 - mod上の二項係数
+#### 2Dcumlative_sum.cpp
+- 2次元累積和

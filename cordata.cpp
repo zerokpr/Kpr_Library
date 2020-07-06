@@ -29,15 +29,15 @@ private:
 
 public:
     
-    //constructor
-    //nodenumは配列の要素数、 はモノイドの単位元
+    // constructor
+    // nodenumは配列の要素数、 はモノイドの単位元
     segment_tree(int nodenum, const T m):m1(m){
         leafnum = bilower(nodenum);
         seg = vector<T> (2*leafnum, m);
 
         // 二項演算の実装
         f = [](T a, T b){
-            return ;
+            return min(a,b); // ここに二項演算を入れる。デフォルトだとRMQ。
         };
     }
 

@@ -1,23 +1,17 @@
-// corutil.cpp
+// corutil.
 
 /* 二次元配列の補完 */
-// c-arr
-template<class T>
-T* extend2dArray(T* src, T* dst, int h, int w, T val){
-    
+// c-arrtemplate<class T>
+void extend2dArray(T* src, T* dst, int h, int w, T val){
     for(int i = 0; i < w+2; ++i){
-        dst[0][i] = val;
-        dst[h+1][i] = val;
+        *(dst + i) = val;
+        *(dst + (h+1)*(w+2) + i) = val;
     }
-    
-    for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) dst[i][j] = src[i][j];
-
+    for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) *(dst + (i+1)*(w+2) + j+1) = *(src + i*w + j);
     for(int i = 0; i < h+2; ++i){
-        dst[i][0] = val;
-        dst[i][w+1] = val;
+        *(dst + i*(w+2)) = val;
+        *(dst + i*(w+2) + w+1) = val;
     }
-
-    return dst;
 }
 
 // 2dVec

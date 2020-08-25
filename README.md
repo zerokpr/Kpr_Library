@@ -5,6 +5,7 @@
   
 データ構造とかはcordata.cpp  
 数学的なものはcormath.cpp  
+便利そうなのでとりあえず作ったものはcorutil.cpp
 に入っています。  
 
 ### 現在用意してあるもの
@@ -23,3 +24,5 @@
 - mod上の二項係数
 #### 2DCumlativeSum.cpp
 - 2次元累積和
+### corutil.cpp
+- 

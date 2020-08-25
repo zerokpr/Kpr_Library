@@ -24,5 +24,5 @@
 - mod上の二項係数
 #### 2DCumlativeSum.cpp
 - 2次元累積和
-### corutil.cpp
-- 
+#### corutil.cpp
+- extend2dArray  

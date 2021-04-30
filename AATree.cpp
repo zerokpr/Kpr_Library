@@ -129,11 +129,11 @@ public:
         this->_size = 0;
     }
 
-    node* insert(const T &x) {
+    void insert(const T &x) {
         return root = insert(x, root);
     }
 
-    node* remove(const T &x) {
+    void remove(const T &x) {
         return root = remove(x, root);
     }
 

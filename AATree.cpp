@@ -1,13 +1,14 @@
 
-// heikou nibun tansaku gi
+// corbeau sword
 template<class T>
 class AATree {
     struct node {
         T value;
         int level;
+        int size;
         node *left;
         node *right;
-        explicit node(T val, int lv, node* l, node* r) : value(val), level(lv), left(l), right(r) {}
+        explicit node(T val, int lv, node* l, node* r) : value(val), level(lv), size(1), left(l), right(r) {}
     };
 
 private:
@@ -22,8 +23,10 @@ private:
             node* l = t->left;
             t->left = l->right;
             l->right = t;
+            t->size = size(t->left) + size(t->right)+1;
             return l;
         } else {
+            t->size = size(t->left) + size(t->right)+1;
             return t;
         }
     }
@@ -36,8 +39,12 @@ private:
             t->right = r->left;
             r->left = t;
             ++(r->level);
+            t->size = size(t->left) + size(t->right)+1;
             return r;
-        } else return t;
+        } else {
+            t->size = size(t->left) + size(t->right)+1;
+            return t;
+        }
     }
 
     node* insert(const T &x, node* t) {
@@ -49,6 +56,7 @@ private:
         
         t = skew(t);
         t = split(t);
+        t->size = size(t->left) + size(t->right) + 1;
 
         return t;
     }
@@ -80,6 +88,7 @@ private:
         if (t->right != nullptr) t->right->right = skew(t->right->right);
         t = split(t);
         t->right = split(t->right);
+        t->size = size(t->left) + size(t->right) + 1;
         return t;
     }
 
@@ -88,6 +97,11 @@ private:
         if (x < t->value) return find(x, t->left);
         else if(x > t->value) return find(x, t->right);
         else return true;
+    }
+
+    inline int size(node *t) {
+        if(t == nullptr) return 0;
+        else return t->size;
     }
 
 
@@ -130,20 +144,39 @@ public:
     }
 
     void insert(const T &x) {
-        return root = insert(x, root);
+        this->root = insert(x, this->root);
     }
 
     void remove(const T &x) {
-        return root = remove(x, root);
+        this->root = remove(x, this->root);
     }
 
     bool find(const T &x) {
-        return find(x, root);
+        return find(x, this->root);
     }
 
-
     int size() {
-        return this->_size;
+        return size(this->root);
+    }
+
+    T get(int k, node* t) {
+        if(t == nullptr) {
+            std::cout << "Error in AATree::get\n";
+            return "";
+        }
+        if (k == size(t->left)) return t->value;
+        if (k < size(t->left)) {
+            return get(k, t->left);
+        } else {
+            return get(k-size(t->left)-1, t->right);
+        }
+    }
+    // get k-th element
+    T get(int k) {
+        if(size(this->root) < k) {
+            return 0;
+        };
+        return get(k, this->root);
     }
 
 };
